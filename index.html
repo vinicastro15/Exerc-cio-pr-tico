@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emissão de Nota Fiscal de Serviço</title>
+    <link rel="stylesheet" href="gerarNotaFiscal.js">
+</head>
+<body>
+
+    <h1>Emissão de Nota Fiscal de Serviço</h1>
+
+    <label for="valorServico">Valor do Serviço:</label>
+    <input type="number" id="valorServico" name="valorServico" step="0.01">
+    <br><br>
+
+    <label for="baseCalculoISS">Base de Cálculo do ISS:</label>
+    <input type="number" id="baseCalculoISS" name="baseCalculoISS" step="0.01">
+    <br><br>
+
+    <label for="aliquotaISS">Alíquota do ISS (%):</label>
+    <input type="number" id="aliquotaISS" name="aliquotaISS" step="0.01">
+    <br><br>
+
+    <button onclick="gerarNotaFiscal()">Gerar Nota Fiscal</button>
+
+    <h2>Nota Fiscal</h2>
+
+    <div id="notaFiscal"></div>
+
+    <script>
+        function gerarNotaFiscal() {
+            let valorServico = parseFloat(document.getElementById('valorServico').value);
+            let baseCalculoISS = parseFloat(document.getElementById('baseCalculoISS').value);
+            let aliquotaISS = parseFloat(document.getElementById('aliquotaISS').value);
+
+            let valorISS = (baseCalculoISS * aliquotaISS) / 100;
+
+            let notaFiscal = 'Valor do Serviço: R$' + valorServico + '<br>';
+            notaFiscal += 'Base de Cálculo do ISS: R$' + baseCalculoISS + '<br>';
+            notaFiscal += 'Alíquota do ISS: ' + aliquotaISS + '%<br>';
+            notaFiscal += 'Valor do ISS: R$' + valorISS + '<br>';
+            notaFiscal += 'Valor Total da Nota Fiscal: R$' + (valorServico + valorISS);
+
+            document.getElementById('notaFiscal').innerHTML = notaFiscal;
+        }
+    </script>
+
+</body>
+</html>
